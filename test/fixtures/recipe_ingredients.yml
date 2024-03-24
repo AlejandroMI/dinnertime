@@ -1,0 +1,37 @@
+# Cornbread
+cornbread_flour:
+  recipe: golden_cornbread
+  ingredient: flour
+
+cornbread_cornmeal:
+  recipe: golden_cornbread
+  ingredient: cornmeal
+
+cornbread_salt:
+  recipe: golden_cornbread
+  ingredient: salt
+
+cornbread_vegetable_oil:
+  recipe: golden_cornbread
+  ingredient: vegetable_oil
+
+# Cake
+chocolate_cake_flour:
+  recipe: chocolate_cake
+  ingredient: flour
+
+chocolate_cake_sugar:
+    recipe: chocolate_cake
+    ingredient: sugar
+
+chocolate_cake_cocoa_powder:
+    recipe: chocolate_cake
+    ingredient: cocoa_powder
+
+chocolate_cake_eggs:
+    recipe: chocolate_cake
+    ingredient: eggs
+
+chocolate_cake_milk:
+    recipe: chocolate_cake
+    ingredient: milk

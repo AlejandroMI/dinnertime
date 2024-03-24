@@ -1,0 +1,23 @@
+flour:
+  name: "1 cup all-purpose flour"
+
+cornmeal:
+  name: "1 cup yellow cornmeal"
+
+salt:
+  name: "1 teaspoon salt"
+
+vegetable_oil:
+  name: "⅓ cup vegetable oil"
+
+sugar:
+  name: "⅔ cup white sugar"
+
+cocoa_powder:
+  name: "¾ cup cocoa powder"
+
+eggs:
+  name: "2 eggs"
+
+milk:
+  name: "1 cup milk"
