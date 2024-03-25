@@ -7,7 +7,7 @@ golden_cornbread:
   cuisine: American
   category: Cornbread
   author: bluegirl
-  image: https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2021%2F10%2F26%2Fcornbread-1.jpg
+  image: https://example.com/golden_cornbread.jpg
 
 chocolate_cake:
   title: Simple Chocolate Cake
@@ -18,3 +18,11 @@ chocolate_cake:
   category: Cake
   author: patissier
   image: https://example.com/chocolate_cake.jpg
+
+magic_pizza:
+  title: Magic Recipe
+  cook_time: 1
+  prep_time: 1
+  ratings: 5
+  cuisine: Hogwarts
+  category: Special

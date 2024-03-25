@@ -21,3 +21,6 @@ eggs:
 
 milk:
   name: "1 cup milk"
+
+magic:
+  name: "1 cup magic"

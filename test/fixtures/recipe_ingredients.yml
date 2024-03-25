@@ -35,3 +35,8 @@ chocolate_cake_eggs:
 chocolate_cake_milk:
     recipe: chocolate_cake
     ingredient: milk
+
+# Special
+magic_pizza_magic:
+  recipe: magic_pizza
+  ingredient: magic
