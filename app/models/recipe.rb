@@ -6,9 +6,11 @@ class Recipe < ApplicationRecord
   # We can add more validations here...
 
   def self.search_by_ingredient(ingredient_names)
+    # Allow for a single ingredient (string) or an array of ingredients
     ingredient_names = [ingredient_names].flatten.map(&:downcase)
+
     joins(:ingredients)
-      .where('LOWER(ingredients.name) IN (?)', ingredient_names)
+      .where("LOWER(ingredients.name) % ANY (ARRAY[?])", ingredient_names)
       .distinct # This is to avoid repeating the same recipe if it has multiple ingredients in the search query
   end
 end
