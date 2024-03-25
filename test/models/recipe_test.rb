@@ -23,4 +23,16 @@ class RecipeTest < ActiveSupport::TestCase
     @recipe.prep_time = -1
     assert_not @recipe.valid?
   end
+
+  test "should find recipes by ingredient name" do
+    ingredient = ingredients(:flour)
+    recipe_with_flour = recipes(:golden_cornbread)
+    another_recipe_with_flour = recipes(:chocolate_cake)
+
+    found_recipes = Recipe.search_by_ingredient(ingredient.name)
+
+    # It should find both recipes that contain flour
+    assert_includes found_recipes, recipe_with_flour, "Should find recipes containing flour"
+    assert_includes found_recipes, another_recipe_with_flour, "Should find recipes containing flour"
+  end
 end
