@@ -7,8 +7,12 @@ class Recipe < ApplicationRecord
 
   def self.search_by_ingredient(ingredient_names)
     ingredient_names = [ingredient_names].flatten.map(&:downcase)
+
+    conditions = ingredient_names.map { |name| "LOWER(ingredients.name) LIKE ?" }.join(' OR ')
+    query_params = ingredient_names.map { |name| "%#{name}%" }
+
     joins(:ingredients)
-      .where('LOWER(ingredients.name) IN (?)', ingredient_names)
+      .where(conditions, *query_params)
       .distinct # This is to avoid repeating the same recipe if it has multiple ingredients in the search query
   end
 end
