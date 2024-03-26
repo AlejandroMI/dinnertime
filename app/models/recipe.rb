@@ -11,8 +11,20 @@ class Recipe < ApplicationRecord
     conditions = ingredient_names.map { |name| "LOWER(ingredients.name) LIKE ?" }.join(' OR ')
     query_params = ingredient_names.map { |name| "%#{name}%" }
 
-    joins(:ingredients)
-      .where(conditions, *query_params)
-      .distinct # This is to avoid repeating the same recipe if it has multiple ingredients in the search query
+    recipes = joins(:ingredients).where(conditions, *query_params)
+
+    if ingredient_names.length > 1
+      grouped_recipes = recipes.to_a.group_by(&:id).map do |_, recipes|
+        [recipes.first, recipes.count]
+      end
+
+      sorted_and_grouped_recipes = grouped_recipes.sort_by { |_, count| -count }
+
+      unique_sorted_recipes = sorted_and_grouped_recipes.map { |recipe, _| recipe }
+
+      return unique_sorted_recipes
+    else
+      return recipes.distinct
+    end
   end
 end

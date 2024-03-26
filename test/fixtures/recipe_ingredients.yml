@@ -40,3 +40,16 @@ chocolate_cake_milk:
 magic_pizza_magic:
   recipe: magic_pizza
   ingredient: magic
+
+# Bread
+bread_flour:
+  recipe: bread
+  ingredient: flour
+
+bread_water:
+    recipe: bread
+    ingredient: water
+
+bread_salt:
+    recipe: bread
+    ingredient: salt

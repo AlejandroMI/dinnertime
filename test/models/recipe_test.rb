@@ -35,7 +35,7 @@ class RecipeTest < ActiveSupport::TestCase
     assert_includes found_recipes, another_recipe_with_flour, "Should find second recipe containing flour"
   end
 
-  test "should find recipes by multiple ingredient names" do
+  test "should find recipes by multiple ingredient names (2)" do
     recipe_with_cocoa = recipes(:chocolate_cake) # Fixture with cocoa
     recipe_with_magic = recipes(:magic_pizza) # Fixture with magic
 
@@ -43,6 +43,20 @@ class RecipeTest < ActiveSupport::TestCase
 
     assert_includes found_recipes, recipe_with_cocoa, "Should find recipes containing cocoa powder"
     assert_includes found_recipes, recipe_with_magic, "Should find recipes containing magic"
+  end
+
+  test "should find recipes by multiple ingredient names (3)" do
+    recipe_with_flour = recipes(:bread)
+    another_recipe_with_flour = recipes(:golden_cornbread)
+    yet_another_recipe_with_flour = recipes(:chocolate_cake)
+
+    found_recipes = Recipe.search_by_ingredient(["flour", "water", "salt"])
+
+    # It should order the recipes prioritizing the one with more ingredient matches
+    assert_equal 3, found_recipes.count
+    assert_includes found_recipes, recipe_with_flour
+    assert_includes found_recipes, another_recipe_with_flour
+    assert_includes found_recipes, yet_another_recipe_with_flour
   end
 
   test "should find recipes that have multiple ingredients searched without repeating them" do
@@ -80,5 +94,19 @@ class RecipeTest < ActiveSupport::TestCase
     found_recipes = Recipe.search_by_ingredient("cocoa") # Searching just for cocoa
 
     assert_includes found_recipes, recipe_with_cocoa, "Should find recipes containing cocoa powder"
+  end
+
+  test "should order recipes prioritizing the ones with more ingredient matches" do
+    recipe_with_flour = recipes(:bread) # 3 matches
+    another_recipe_with_flour = recipes(:golden_cornbread) # 2 matches
+    yet_another_recipe_with_flour = recipes(:chocolate_cake) # 1 match
+
+    found_recipes = Recipe.search_by_ingredient(["flour", "water", "salt"])
+
+    # It should order the recipes prioritizing the one with more ingredient matches
+    assert_equal 3, found_recipes.count
+    assert_equal recipe_with_flour, found_recipes.first
+    assert_equal another_recipe_with_flour, found_recipes.second
+    assert_equal yet_another_recipe_with_flour, found_recipes.last
   end
 end

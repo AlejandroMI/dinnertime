@@ -9,6 +9,14 @@ golden_cornbread:
   author: bluegirl
   image: https://example.com/golden_cornbread.jpg
 
+bread:
+  title: Bread
+  cook_time: 30
+  prep_time: 20
+  ratings: 4.5
+  cuisine: French
+  category: Bread
+
 chocolate_cake:
   title: Simple Chocolate Cake
   cook_time: 45
