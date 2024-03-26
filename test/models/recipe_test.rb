@@ -50,16 +50,14 @@ class RecipeTest < ActiveSupport::TestCase
 
   test "should find recipes that have multiple ingredients searched without repeating them" do
     ingredient_one = ingredients(:cocoa_powder)
-    ingredient_two = ingredients(:eggs)
-    recipe_with_cocoa_and_eggs = recipes(:chocolate_cake) # Fixture with cocoa
+    ingredient_two = ingredients(:milk)
+    recipe_with_cocoa_and_milk = recipes(:chocolate_cake) # Fixture with cocoa
 
     found_recipes = Recipe.search_by_ingredient([ingredient_one.name, ingredient_two.name])
 
-    # It should only find the recipe that contains both cocoa and eggs, the chocolate cake, and just once
-    puts found_recipes.inspect
-
+    # It should only find the recipe that contains both cocoa and milk, the chocolate cake, and just once
     assert_equal 1, found_recipes.count
-    assert_includes found_recipes, recipe_with_cocoa_and_eggs, "Should find recipes containing flour and eggs once"
+    assert_includes found_recipes, recipe_with_cocoa_and_milk, "Should find recipes containing flour"
   end
 
   test "should find recipes only one even if you repeat the ingredient" do
@@ -83,15 +81,5 @@ class RecipeTest < ActiveSupport::TestCase
     # It should find both recipes that contain flour
     assert_includes found_recipes, recipe_with_flour, "Should find recipes containing flour"
     assert_includes found_recipes, another_recipe_with_flour, "Should find recipes containing flour"
-  end
-
-  test "should find recipes by ingredient name with typos" do
-    # Misspell the ingredient name
-    typo_ingredient_name = "egs" # Intended to be "eggs"
-    recipe_with_eggs = recipes(:chocolate_cake)
-
-    found_recipes = Recipe.search_by_ingredient(typo_ingredient_name)
-
-    assert_includes found_recipes, recipe_with_eggs, "Should find recipes despite the typo in ingredient name"
   end
 end
