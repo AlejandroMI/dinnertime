@@ -73,3 +73,30 @@ like calories, proteins, etc.
 Here is an example of a [nutrition system](https://alejandromarco.notion.site/Nutrici-n-f6406bf639cc44688f64b71af2c0f3c9)
 I created where you can see the data model for a more complex system. This allows calculating total calories or easier
 searching for recipes based on the nutritional values.
+
+# Seeds
+Make sure to run the seeds to populate the database with the recipes.
+
+```bash
+ rails db:seed
+```
+
+# Searching for recipes
+The idea is to search for recipes based on the ingredients you have available at home. Also, we should show the more
+relevant ones. The goal is to prioritize recipes with the most ingredient matches but, among those with the same number
+of matches, prefer the ones with fewer total ingredients.
+
+Let's say I have salt, water and flour. I should get recipes that have those ingredients, and the ones with fewer first,
+like a simple bread instead of a cake that also contains these ingredients.
+
+Another aspect to take into account given our data model, is that we can have ingredients with different names but that
+are the same. For example, "all-purpose flour" and "flour" are the same ingredient. Also different types of sugar, like
+"white sugar" and "brown sugar". We should consider these cases when searching for recipes and always give the simplest
+option.
+
+On top of it we could add other things like rating to order, but this can be a further improvement onnce the user has
+the ability to filter the results and sort from the UI.
+
+It may differ a bit from the original website, but I think is better to prioritize the recipes that are easier to make
+with the ingredients searched in this case.
+https://www.allrecipes.com/search?q=chicken%2C+cheese%2C+tomato

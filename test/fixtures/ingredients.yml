@@ -27,3 +27,15 @@ magic:
 
 water:
   name: "1 cup water"
+
+chicken:
+    name: "1 lb chicken"
+
+chicken_breast:
+    name: "1 lb chicken breast"
+
+chicken_thigh:
+    name: "1 lb chicken thigh"
+
+chicken_broth:
+    name: "1 cup chicken broth"

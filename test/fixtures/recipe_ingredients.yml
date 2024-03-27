@@ -36,10 +36,31 @@ chocolate_cake_milk:
     recipe: chocolate_cake
     ingredient: milk
 
-# Special
+# Magic Pizza
 magic_pizza_magic:
   recipe: magic_pizza
   ingredient: magic
+
+# Magic Bread
+magic_bread_magic:
+  recipe: magic_bread
+  ingredient: magic
+
+magic_bread_flour:
+  recipe: magic_bread
+  ingredient: flour
+
+magic_bread_water:
+  recipe: magic_bread
+  ingredient: water
+
+magic_bread_salt:
+  recipe: magic_bread
+  ingredient: salt
+
+magic_bread_vegetable_oil:
+  recipe: magic_bread
+  ingredient: vegetable_oil
 
 # Bread
 bread_flour:
@@ -53,3 +74,21 @@ bread_water:
 bread_salt:
     recipe: bread
     ingredient: salt
+
+# Chicken Dumplings
+chicken_dumplings_chicken_breast:
+    recipe: chicken_dumplings
+    ingredient: chicken_breast
+
+chicken_dumplings_chicken_broth:
+    recipe: chicken_dumplings
+    ingredient: chicken_broth
+
+chicken_dumplings_chicken_thigh:
+    recipe: chicken_dumplings
+    ingredient: chicken_thigh
+
+# Plain Chicken
+plain_chicken_chicken_breast:
+    recipe: plain_chicken
+    ingredient: chicken

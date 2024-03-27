@@ -5,6 +5,7 @@ class RecipeTest < ActiveSupport::TestCase
     @recipe = recipes(:chocolate_cake) # Assuming you have fixtures
   end
 
+  # validation tests
   test "should be valid" do
     assert @recipe.valid?
   end
@@ -24,6 +25,7 @@ class RecipeTest < ActiveSupport::TestCase
     assert_not @recipe.valid?
   end
 
+  # search_by_ingredient tests
   test "should find recipes by ingredient name" do
     recipe_with_flour = recipes(:golden_cornbread)
     another_recipe_with_flour = recipes(:chocolate_cake)
@@ -53,7 +55,7 @@ class RecipeTest < ActiveSupport::TestCase
     found_recipes = Recipe.search_by_ingredient(["flour", "water", "salt"])
 
     # It should order the recipes prioritizing the one with more ingredient matches
-    assert_equal 3, found_recipes.count
+    assert_equal 4, found_recipes.count
     assert_includes found_recipes, recipe_with_flour
     assert_includes found_recipes, another_recipe_with_flour
     assert_includes found_recipes, yet_another_recipe_with_flour
@@ -96,17 +98,42 @@ class RecipeTest < ActiveSupport::TestCase
     assert_includes found_recipes, recipe_with_cocoa, "Should find recipes containing cocoa powder"
   end
 
-  test "should order recipes prioritizing the ones with more ingredient matches" do
-    recipe_with_flour = recipes(:bread) # 3 matches
-    another_recipe_with_flour = recipes(:golden_cornbread) # 2 matches
-    yet_another_recipe_with_flour = recipes(:chocolate_cake) # 1 match
+  test "should order recipies prioritizing the ones with more matches, but less ingredients within the matches" do
+    recipe_most_matches = recipes(:bread) # 3 matches, 3 ingredients
+    recipe_most_matches_more_ingredients = recipes(:magic_bread) # 3 matches, 5 ingredients
+    recipe_with_two_matches = recipes(:golden_cornbread) # 2 matches, 4 ingredients
+    recipe_with_fewer_matches = recipes(:chocolate_cake) # 1 match, 5 ingredients
 
     found_recipes = Recipe.search_by_ingredient(["flour", "water", "salt"])
 
     # It should order the recipes prioritizing the one with more ingredient matches
-    assert_equal 3, found_recipes.count
-    assert_equal recipe_with_flour, found_recipes.first
-    assert_equal another_recipe_with_flour, found_recipes.second
-    assert_equal yet_another_recipe_with_flour, found_recipes.last
+    assert_equal 4, found_recipes.count
+    assert_equal recipe_most_matches, found_recipes.first
+    assert_equal recipe_most_matches_more_ingredients, found_recipes.second
+    assert_equal recipe_with_two_matches, found_recipes.third
+    assert_equal recipe_with_fewer_matches, found_recipes.last
+  end
+
+  test "should order recipies prioritizing the ones with less ingredients when only one match" do
+    recipe_with_less_ingredients = recipes(:bread) # 3 ingredients
+    recipe_with_more_ingredients = recipes(:magic_bread) # 5 ingredients
+
+    found_recipes = Recipe.search_by_ingredient("salt")
+
+    # It should order the recipes prioritizing the one with less ingredients
+    assert_equal recipe_with_less_ingredients, found_recipes.first
+    assert_equal recipe_with_more_ingredients, found_recipes.last
+  end
+
+  # If the user has only chicken, we want to show the simplest recipe, even another recipe can have more matches but
+  # using more specific chicken parts
+  test "should count ingredients with the same search term only once when sorting by relevance" do
+    recipe_with_chicken = recipes(:plain_chicken) # just chicken
+    recipe_with_chicken_parts = recipes(:chicken_dumplings) # different chicken parts
+
+    found_recipes = Recipe.search_by_ingredient("chicken")
+
+    assert_equal recipe_with_chicken, found_recipes.first
+    assert_equal recipe_with_chicken_parts, found_recipes.last
   end
 end

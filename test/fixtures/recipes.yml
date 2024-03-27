@@ -34,3 +34,27 @@ magic_pizza:
   ratings: 5
   cuisine: Hogwarts
   category: Special
+
+magic_bread:
+    title: Magic Bread
+    cook_time: 1
+    prep_time: 1
+    ratings: 5
+    cuisine: Hogwarts
+    category: Special
+
+chicken_dumplings:
+    title: Chicken and Dumplings
+    cook_time: 60
+    prep_time: 30
+    ratings: 4.5
+    cuisine: American
+    category: Chicken
+
+plain_chicken:
+    title: Plain Chicken
+    cook_time: 30
+    prep_time: 10
+    ratings: 4.5
+    cuisine: American
+    category: Chicken
